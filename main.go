@@ -17,6 +17,7 @@ import (
 
 var autoUpdateComment string
 var packagePath string
+var imagePrefix string
 
 func visit(object *yaml.RNode, p string) error {
 	switch object.YNode().Kind {
@@ -47,7 +48,7 @@ func visitScalar(node *yaml.RNode, path string) error {
 	}
 
 	// Remove any existing digest
-	oldReferenceString := node.YNode().Value
+	oldReferenceString := strings.TrimPrefix(node.YNode().Value, imagePrefix)
 
 	oldReference, err := name.ParseReference(strings.Split(oldReferenceString, "@")[0])
 	if err != nil {
@@ -64,7 +65,7 @@ func visitScalar(node *yaml.RNode, path string) error {
 		return err
 	}
 
-	node.YNode().SetString(newReference.String())
+	node.YNode().SetString(imagePrefix + newReference.String())
 
 	log.WithFields(log.Fields{
 		"path":         path,
@@ -90,6 +91,7 @@ func main() {
 
 	flag.StringVar(&autoUpdateComment, "comment", "$update-digest$", "Lines with this comment will be updated")
 	flag.StringVar(&packagePath, "directory", "", "Folder to search for yaml files")
+	flag.StringVar(&imagePrefix, "prefix", "", "Prefix to put onto the beginning of image references")
 
 	flag.Parse()
 

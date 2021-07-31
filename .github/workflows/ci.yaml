@@ -32,6 +32,8 @@ jobs:
         uses: actions/checkout@v2
       - name: Update image digests
         uses: bmxguy100/kube-digest-updater@main
+        with:
+          prefix: docker://
       # Note: pushes run from inside github actions do not cause an infinite loop
       - name: Commit and Push changes
         uses: stefanzweifel/git-auto-commit-action@v4

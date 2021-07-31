@@ -5,9 +5,14 @@ inputs:
     description: 'Lines with this comment will be updated'
     required: false
     default: '$update-digest$'
+  prefix: # id of input
+    description: 'Prefix to put onto the beginning of image references'
+    required: false
+    default: ''
 runs:
   using: 'docker'
-  image: 'docker://ghcr.io/bmxguy100/kube-digest-updater:latest' # $update-digest$
+  image: 'docker://ghcr.io/bmxguy100/kube-digest-updater' # $update-digest$
   args:
   - -comment=${{ inputs.comment }}
+  - -prefix=${{ inputs.prefix }}
   - -directory=.
