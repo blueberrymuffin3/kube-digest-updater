@@ -7,7 +7,7 @@ inputs:
     default: '$update-digest$'
 runs:
   using: 'docker'
-  image: 'Dockerfile'
+  image: 'ghcr.io/bmxguy100/kube-digest-updater:latest'
   args:
   - -comment=${{ inputs.comment }}
   - -directory=.
