@@ -20,8 +20,6 @@ RUN CGO_ENABLED=0 go build -o /kube-digest-updater
 
 FROM gcr.io/distroless/static
 
-WORKDIR /
-
 COPY --from=build /kube-digest-updater /kube-digest-updater
 
 EXPOSE 8080
