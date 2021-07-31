@@ -11,7 +11,7 @@ inputs:
     default: ''
 runs:
   using: 'docker'
-  image: 'docker://ghcr.io/bmxguy100/kube-digest-updater' # $update-digest$
+  image: 'docker://ghcr.io/bmxguy100/kube-digest-updater@sha256:07d828e448c04f0733d0142e4a240169d35b71881c3a6020b9b45fefd2abd000' # $update-digest$
   args:
   - -comment=${{ inputs.comment }}
   - -prefix=${{ inputs.prefix }}
