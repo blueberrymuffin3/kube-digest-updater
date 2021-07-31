@@ -18,7 +18,7 @@ RUN CGO_ENABLED=0 go build -o /kube-digest-updater
 ## Deploy
 ##
 
-FROM scratch
+FROM gcr.io/distroless/static
 
 COPY --from=build /kube-digest-updater /kube-digest-updater
 
