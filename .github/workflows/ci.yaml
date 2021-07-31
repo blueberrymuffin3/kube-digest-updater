@@ -6,7 +6,7 @@ on:
       - "main"
 
 jobs:
-  docker:
+  build-and-push:
     runs-on: ubuntu-latest
     steps:
       - name: Set up Docker Buildx
@@ -23,3 +23,17 @@ jobs:
         with:
           push: true
           tags: ghcr.io/bmxguy100/kube-digest-updater
+
+  update-action:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Update image digests
+        uses: bmxguy100/kube-digest-updater@main
+      # Note: pushes run from inside github actions do not cause an infinite loop
+      - name: Commit and Push changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Update image digest
