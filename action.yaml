@@ -1,0 +1,12 @@
+name: 'Kubernetes digest updater'
+description: 'Greet someone and record the time'
+inputs:
+  comment: # id of input
+    description: 'Lines with this comment will be updated'
+    required: false
+    default: '$update-digest$'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+  - -comment=${{ inputs.comment }}
