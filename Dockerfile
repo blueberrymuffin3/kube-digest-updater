@@ -18,12 +18,8 @@ RUN CGO_ENABLED=0 go build -o /kube-digest-updater
 ## Deploy
 ##
 
-FROM gcr.io/distroless/static
+FROM scratch
 
 COPY --from=build /kube-digest-updater /kube-digest-updater
-
-EXPOSE 8080
-
-USER nonroot:nonroot
 
 ENTRYPOINT ["/kube-digest-updater"]
