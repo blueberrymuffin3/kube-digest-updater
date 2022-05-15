@@ -31,7 +31,7 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v2
       - name: Update image digests
-        uses: ${{ github.repository_owner }}/kube-digest-updater@main
+        uses: blueberrymuffin3/kube-digest-updater@main
         with:
           prefix: docker://
       # Note: pushes run from inside github actions do not cause an infinite loop
