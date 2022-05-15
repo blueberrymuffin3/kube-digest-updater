@@ -1,4 +1,4 @@
-module github.com/bmxguy100/kube-digest-updater
+module github.com/blueberrymuffin3/kube-digest-updater
 
 go 1.16
 
